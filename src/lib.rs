@@ -5,6 +5,8 @@
 #[macro_use]
 extern crate alloc;
 
+
+use alloc::{vec, vec::Vec};
 use alloc::vec::Vec;
 
 use alloy_primitives::{Address, U256, FixedBytes};
@@ -283,15 +285,15 @@ impl ERC6909 {
     }
 
     fn balance_of(&self, owner: Address, id: U256) -> U256 {
-        self._balance.getter(owner).get(id)
+        self._balance.get(owner).get(id)
     }
 
     fn allowance(&self, owner: Address, spender: Address, id: U256) -> U256 {
-        self._allowances.getter(owner).getter(spender).get(id)
+        self._allowances.get(owner).get(spender).get(id)
     }
 
     fn is_operator(&self, owner: Address, spender: Address) -> bool {
-        self._operator_approvals.getter(owner).get(spender)
+        self._operator_approvals.get(owner).get(spender)
     }
 
     fn approve(&mut self, spender: Address, id: U256, value: U256) -> Result<(), ERC6909Error> {
