@@ -7,7 +7,6 @@ extern crate alloc;
 
 
 use alloc::{vec, vec::Vec};
-use alloc::vec::Vec;
 
 use alloy_primitives::{Address, U256, FixedBytes};
 use alloy_sol_types::sol;
@@ -88,9 +87,7 @@ impl ERC6909 {
             .setter(owner)
             .setter(spender)
             .insert(id, value);
-        log(
-            self.vm(),
-            Approval {
+        self.vm().log(Approval {
                 owner,
                 spender,
                 id,
@@ -121,9 +118,7 @@ impl ERC6909 {
         self._operator_approvals
             .setter(owner)
             .insert(sender, approved);
-        log(
-            self.vm(),
-            OperatorSet {
+        self.vm().log(OperatorSet {
                 owner,
                 sender,
                 approved,
@@ -186,9 +181,7 @@ impl ERC6909 {
             self._balance.setter(to).insert(id, balance + value);
         }
 
-        log(
-            self.vm(),
-            Transfer {
+        self.vm().log(Transfer {
                 from,
                 to,
                 id,
